@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes ingredients
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>Mes ingredients</h1>
+		<div>
+			<a href="{{path('ingredient_new')}}" class="btn">Nouveau</a>
+		</div>
+		<div class="count">
+
+			Il y a
+			{{ ingredient.getTotalItemCount}}
+			inggredients au total
+		</div>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Numéro</th>
+					<th scope="col">Nom</th>
+					<th scope="col">Prix</th>
+					<th scope="col">Date de création</th>
+					<th scope="col">Edition</th>
+					<th scope="col">Suppression</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for ingredients in ingredient %}
+					<tr class="table-active">
+						<th scope="row">{{ingredients.id}}</th>
+						<td>{{ingredients.name}}</td>
+						<td>{{ingredients.price}}</td>
+						<td>{{ ingredients.createdAt|date("m/d/Y")}}</td>
+						<td>
+							<a href="{{path('ingredient_edit', {id: ingredients.id})}}" class="btn btn-primary">Modifier</a>
+						</td>
+						<td>
+							<a href="{{path('ingredient.delete', {id: ingredients.id})}}" class="btn btn-warning">Supprimer</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		{# display navigation #}
+		<div class="navigation">
+			{{ knp_pagination_render(ingredient) }}
+		</div>
+
+	</div>
+{% endblock %}
+
