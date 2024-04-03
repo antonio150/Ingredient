@@ -22,14 +22,14 @@ class IngredientController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[Route('/ingredient', name: 'app_ingredient', methods: ["GET"])]
+    #[Route('/', name: 'app_ingredient', methods: ["GET"])]
     public function index(
         IngredientRepository $repository,
         PaginatorInterface $paginator,
         Request $request
     ): Response {
         $ingredients = $repository->findAll();
-
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $ingredient = $paginator->paginate(
             $ingredients,
             $request->query->getInt('page', 1), /*page number*/

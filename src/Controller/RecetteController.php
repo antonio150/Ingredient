@@ -26,6 +26,7 @@ class RecetteController extends AbstractController
     #[Route('/recette', name: 'app_recette', methods: ["GET"])]
     public function index(RecetteRepository $repository, Request $request, PaginatorInterface $paginator): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $recettes = $paginator->paginate(
             $repository->findAll(),
             $request->query->getInt("page", 1),
