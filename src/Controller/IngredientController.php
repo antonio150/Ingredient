@@ -57,7 +57,7 @@ class IngredientController extends AbstractController
             $manager->flush();
             return   $this->redirectToRoute('app_ingredient');
         }
-
+        
         return $this->render('pages/ingredient/new.html.twig', [
             'form' => $form->createView()
         ]);
