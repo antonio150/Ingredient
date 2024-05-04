@@ -12,19 +12,20 @@
 		<form action="{{ path('app_security')}}" method="post">
 			<div>
 				<label for="username" class="form-label mt-4">Adresse email</label>
-<input type="email" class="form-control" id="username" name="_username" placeholder="Retapez ici 'adrien57@orange.fr'">
+<input type="email" class="form-control" id="username" name="_username" placeholder="Saisir email">
 
 
 			</div>
 			<div>
 <label for="password" class="form-label mt-4">Mot de passe</label>
-<input type="password" class="form-control" id="password" placeholder="Mot de passe est 'password'" name="_password" autocomplete="off">
+<input type="password" class="form-control" id="password" placeholder="Saisir mot de passe" name="_password" autocomplete="off">
 
 
 			</div>
 			<button type="submit" class="btn btn-primary">
 				Se connecter
 			</button>
+			<a class="btn btn-primary" href="{{path('security_registration')}}">Créer compte</a>
 		</form>
 	</div>
 {% endblock %}
