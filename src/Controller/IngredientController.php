@@ -28,7 +28,8 @@ class IngredientController extends AbstractController
         PaginatorInterface $paginator,
         Request $request
     ): Response {
-        $ingredients = $repository->findAll();
+        $ingredients = $repository->listerTousIngredient();
+       // dd($ingredients);
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $ingredient = $paginator->paginate(
             $ingredients,

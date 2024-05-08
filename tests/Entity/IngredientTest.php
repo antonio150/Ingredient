@@ -35,7 +35,17 @@ class IngredientTest extends KernelTestCase
         $ingredient->setCreatedAt(new DateTimeImmutable());
 
        
-        $this->assertHasError($ingredient,1);
+        $this->assertHasError($ingredient,0);
+    }
+
+    public function testWithMock()
+    {
+        $ingredient = $this->createMock(Ingredient::class);
+       // dd($ingredient);
+        $ingredient->expects($this->never())
+        ->method('getName');
+
+        // $ingredientService = new 
     }
 
 

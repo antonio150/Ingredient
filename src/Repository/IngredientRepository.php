@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Ingredient;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,9 +17,23 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class IngredientRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $entityManager;
+    public function __construct(ManagerRegistry $registry,
+    EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Ingredient::class);
+        $this->entityManager = $entityManager;
+    }
+
+    public function listerTousIngredient()
+    {
+        $connection = $this->entityManager->getConnection();
+        $sql = 'SELECT id, name,price, created_at as createdAt FROM ingredient';
+        $statement = $connection->prepare($sql);
+        $results = $statement->executeQuery();
+       $val = $results->fetchAllAssociative();
+      
+        return $val;
     }
 
 //    /**
